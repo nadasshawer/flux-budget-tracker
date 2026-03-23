@@ -1,3 +1,41 @@
+# Project Structure
+
+```.
+├── include/                 # Blueprints: All Header Files (.h)
+│   ├── auth/                # registration.h, user_info.h
+│   ├── core/                # globals.h
+│   ├── models/              # classes.h (Transaction, Expense, Income)
+│   ├── utils/               # math_utils.h, datetime.h, text_utils.h, templates.h
+│   └── validation/          # validation.h
+│
+├── src/                     # The Engine: Core C++ Logic (.cpp)
+│   ├── auth/                # registration.cpp, user_info.cpp
+│   ├── core/                # globals.cpp, main.cpp
+│   ├── models/              # classes.cpp
+│   ├── utils/               # math_utils.cpp, datetime.cpp, text_utils.cpp
+│   └── validation/          # validation.cpp
+│
+├── native/                  # The Translator: JavaScript-to-C++ Bridge
+│   └── bridge/              # validation_bridge.cpp
+│
+├── web/                     # The Dashboard: Node.js & UI
+│   ├── public/              # CSS, Images, Client-side JS
+│   └── views/               # EJS Templates
+│
+├── bin/                     # Compiled binaries
+├── Makefile                 # Build instructions
+└── README.md                # Project documentation
+```
+
+### The Path of a "Click"
+
+1. UI: User clicks "Add Expense."
+2. Browser: Sends the form data (Name, Amount) to your Node.js server.
+3. Node.js: Calls your bridgeAddExpense function.
+4. Bridge: Converts the data and calls `new Expense()`.
+5. Database: The bridge calls your new `DatabaseManager` to save it.
+6. Response: Node.js sends a "Success!" message back to the UI.
+
 # Bridging
 
 ## Challenges
@@ -6,33 +44,38 @@
 
 - After creating the basic structure of my backened logic in C++ and my classes, I found out that I need to "re-structure" my
   code to make it bridge-ready
-- Currently, my classes use `std::string` and internal validation. To make them work with a Node.js server, I need to add a **Wrapper**
-- I figured out that I don't need to change my class logic, but I need to create a "Public Entrance" (the extern "C" part) that the web server can call
+- Currently, my classes use `std::string` and internal validation
+- To make them work with a Node.js server, I need to add a **wrapper**
+- I figured out that I don't need to change my class logic, but I need to create a "public entrance" (the `extern "C"` part) that the web server can call
 
 #### Why `extern "C"`?
 
 - C++ "mangles" function names to support features like overloading
 - A web server looking for `addExpense` won't find it if the compiler renamed it to something like`_Z10addExpensePKci`
-- `extern "C"` tells the compiler: "keep the name simple so the outside world can find it"
+- `extern "C"` transforms our C++ (which JS doesn't understand) into C code (which JS understands)
+- It tells the compiler: "keep the name simple so the outside world can find it"
 
 #### Why `const char*`?
 
-- Web browsers and servers speak in simple character arrays
+- Web browsers and servers speak in simple character arrays, this is because C is the universal language of systems
 - They don't know what a C++ `std::string` object is
 - We accept a `const char*` at the door, then immediately turn it into a `std::string` once we're safely inside the C++ logic
 
 ## Strategy
 
-- To allow these 2 languages to talk to each other, I created a bridging file calld `bridge.cpp`
-- This is a **wrapper** file
-  - It includes my existing files (#include "classes.h")
-  - It sits "on top" of my existing code
-  - It translates the Web Browser's language (`char*`) into my C++ language (`std::string`)
+- To allow these 2 languages (JS & C++) to talk to each other, I created bridging files inside the `native/bridge` directory
+- These files are **wrapper** files
+  - They include the existing files (headers)
+  - They sit "on top" of the existing code
+  - They translate the web browser's language (e.g. `char*`) into the C++ language (e.g. `std::string`)
+- **All functions** should be wrapped in `extern "C"` even if no internal conversion happens
+  - This is because the web browser still can't see "inside" my C++ files to find these function
+  - I still need to build the "door" (`extern "C"`), but these functions just walk straight through it without conversion
 
-#### How it works:
+#### How it works?
 
-- The existing files (classes.cpp, validation.cpp) are the _engine_ under the hood
+- The existing files (classes.cpp, validation.cpp, etc..) are the _engine_ under the hood
   - They do the heavy lifting
-- The `bridge.cpp` file is the dashboard
-  - It _doesn't replace the engine_
-  - It just gives the driver (the Web Browser) a _way to talk_ to the engine
+- The bridging files (ending with `_bridge.cpp`) are the dashboard
+  - They _don't replace the engine_
+  - They just give the driver (the web browser) a _way to talk_ to the engine
