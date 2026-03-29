@@ -47,49 +47,49 @@ public:
      - @details Ensures the name is not empty and applies standard capitalization.
      - @param name: The raw string input from the user or UI.
      */
-    void setName(const std::string name);
+    bool setName(const std::string& name);
 
     /**
      - @brief Validates and sets the day of the transaction.
      - @details Requires Month and Year to be set first to calculate max days allowed.
      - @param day: Integer representing the day of the month (1-31).
      */
-    void setDay(const int day);
+    bool setDay(int day);
 
     /**
      - @brief Sets the month of the transaction.
      - @details Validates that the input falls between 1 and 12.
      - @param month: Integer representing the month.
      */
-    void setMonth(const int month);
+    bool setMonth(int month);
 
     /**
      - @brief Sets the year of the transaction.
      - @details Checks if the year is within a reasonable financial range.
      - @param year: Integer representing the year (YYYY).
      */
-    void setYear(const int year);
+    bool setYear(int year);
 
     /**
      - @brief Sets the transaction category.
      - @details Groups the transaction for budget tracking (e.g., Food, Rent).
      - @param category: String representing the type of spending/earning.
      */
-    void setCategory(const std::string category);
+    bool setCategory(const std::string& category);
 
     /**
      - @brief Sets the transaction description.
      - @details Capitalizes the first letter for consistent display in the UI.
      - @param description: Additional details or notes about the transaction.
      */
-    void setDescription(const std::string description);
+    bool setDescription(const std::string& description);
 
     /**
      - @brief Sets the transaction amount.
      - @details Rounds the input to two decimal places using math_utils logic.
      - @param amount: The monetary value of the transaction.
      */
-    void setAmount(const double amount);
+    bool setAmount(double amount);
 
     // --- Getters ---
     /**
@@ -146,9 +146,9 @@ public:
      - @details Automatically runs all inputs through setter validation methods.
      - @param cName, cDay, cMonth, cYear, cCategory, cDescription, cAmount: Core data points.
      */
-    Transaction(const std::string cName, const int cDay, const int cMonth,
-                const int cYear, const std::string cCategory,
-                const std::string cDescription, const double cAmount);
+    Transaction(const std::string& cName, int cDay, int cMonth,
+                int cYear, const std::string& cCategory,
+                const std::string& cDescription, double cAmount);
 };
 
 /**
@@ -168,9 +168,9 @@ public:
      - @brief Parameterized constructor for an expense.
      - @details Passes all parameters to the base Transaction constructor for validation.
      */
-    Expense(const std::string cName, const int cDay, const int cMonth,
-            const int cYear, const std::string cCategory,
-            const std::string cDescription, const double cAmount)
+    Expense(const std::string& cName, int cDay, int cMonth,
+            int cYear, const std::string& cCategory,
+            const std::string& cDescription, double cAmount)
         : Transaction(cName, cDay, cMonth, cYear, cCategory, cDescription,
                       cAmount) {};
 };
@@ -198,50 +198,50 @@ public:
      - @details Capitalizes the source name (e.g., "Work" or "Freelance").
      - @param source: String representing the origin of funds.
      */
-    void setSource(const std::string source);
+    bool setSource(const std::string& source);
 
     /**
      - @brief Sets the pre-tax income amount.
      - @param grossAmount: Double representing total earned before deductions.
      */
-    void setGrossAmount(const double grossAmount);
+    bool setGrossAmount(double grossAmount);
 
     /**
      - @brief Sets the frequency of the income payment.
      - @details Integer mapped to specific intervals (e.g., 1 for Monthly).
      - @param frequency: Integer code for payment timing.
      */
-    void setFrequency(const int frequency);
+    bool setFrequency(int frequency);
 
     /**
      - @brief Sets the payment method/mode.
      - @param mode: String describing how funds are received (e.g., "E-transfer").
      */
-    void setMode(const std::string mode);
+    bool setMode(const std::string& mode);
 
     /**
      - @brief Sets the percentage of tax to be applied.
      - @param taxRate: Double representing the tax percentage (e.g., 0.15).
      */
-    void setTaxRate(const double taxRate);
+    bool setTaxRate(double taxRate);
 
     /**
      - @brief Sets the legal or internal tax category.
      - @param taxCategory: String classification for tax reporting.
      */
-    void setTaxCategory(const std::string taxCategory);
+    bool setTaxCategory(const std::string& taxCategory);
 
     /**
      - @brief Sets the current clearance status.
      - @param status: String (e.g., "Pending", "Cleared").
      */
-    void setStatus(const std::string status);
+    bool setStatus(const std::string& status);
 
     /**
      - @brief Assigns income to a specific budget module.
      - @param budgetAllocation: String identifying the target budget.
      */
-    void setBudgetAllocation(const std::string budgetAllocation);
+    bool setBudgetAllocation(const std::string& budgetAllocation);
 
     // --- Getters ---
     /** 
@@ -302,70 +302,12 @@ public:
      - @brief Parameterized constructor for a full income record.
      - @details Initializes base transaction data and unique income attributes.
      */
-    Income(const std::string cName, const int cDay, const int cMonth,
-           const int cYear, const std::string cSource, const double cGrossAmount,
-           const std::string cCategory, const std::string cDescription,
-           const double cAmount, const int cFrequency, const std::string cMode,
-           const double cTaxRate, const std::string cTaxCategory,
-           const std::string cStatus, const std::string cBudgetAllocation);
-};
-
-/**
- - @class Budget
- - @brief Management class for tracking spending vs. limits.
- - @details Analyzes financial health by comparing budgeted goals to actual data.
- */
-class Budget {
-protected:
-    double BudgetedAmount;
-    double ActualAmount;
-
-public:
-    // --- Setters ---
-    /**
-     - @brief Sets the maximum spending limit for this budget.
-     - @param budgetedAmount: Double representing the goal limit.
-     */
-    void setBudgetedAmount(const double budgetedAmount);
-
-    /**
-     - @brief Sets the real-world spending amount recorded.
-     - @param actualAmount: Double representing the current total spend.
-     */
-    void setActualAmount(const double actualAmount);
-
-    // --- Getters ---
-    /** 
-     - @brief Returns the budget limit.
-     - @return double. 
-     */
-    double getBudgetedAmount() const;
-
-    /** 
-     - @brief Returns actual spending.
-     - @return double. 
-     */
-    double getActualAmount() const;
-
-    // --- Constructors ---
-    /**
-     - @brief Default constructor for Budget.
-     */
-    Budget();
-
-    /**
-     - @brief Parameterized constructor for budget tracking.
-     - @param cBudgetedAmount, cActualAmount: Initial goal and spending values.
-     */
-    Budget(const double cBudgetedAmount, const double cActualAmount);
-
-    // --- Methods ---
-    /**
-     - @brief Calculates the health of the current cash flow.
-     - @details Subtracts actual spending from the budget to find the delta.
-     - @return std::string: Returns "+ve cash flow" if under budget, "-ve" if over.
-     */
-    std::string calcDifference();
+    Income(const std::string& cName, int cDay, int cMonth,
+           int cYear, const std::string& cSource, double cGrossAmount,
+           const std::string& cCategory, const std::string& cDescription,
+           double cAmount, int cFrequency, const std::string& cMode,
+           double cTaxRate, const std::string& cTaxCategory,
+           const std::string& cStatus, const std::string& cBudgetAllocation);
 };
 
 #endif

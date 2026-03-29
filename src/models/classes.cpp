@@ -6,77 +6,81 @@
 #include "../../include/core/globals.h"
 
 // Library Imports
-#include <iostream>
 #include <string>
 #include <vector>
 
-// Global Variables
-char newExpChoice;
 
 // --- Transactions Class (Base for Expense, Income) ---
 // Setters & Getters
-void Transaction::setName(std::string name) {
+bool Transaction::setName(const std::string& name) {
   bool validName = checkNameInput(name);
   if (validName == true) {
     std::string capitalizedName = capitalizeFirstLetter(name);
     this->Name = capitalizedName;
+    return true;
   } else {
-    this->Name = "";
+    return false;
   }
 }
 std::string Transaction::getName() const { return Name; }
 
-void Transaction::setMonth(int month) {
+bool Transaction::setMonth(int month) {
   bool checkedMonth = checkNumMonthInput(month);
   if (checkedMonth) {
     this->Month = month;
+    return true;
   } else {
-    this->Month = 0;
+    return false;
   }
 }
 int Transaction::getMonth() const { return Month; }
 
-void Transaction::setYear(int year) {
+bool Transaction::setYear(int year) {
   bool checkedYear = checkYearInput(year);
   if (checkedYear) {
     this->Year = year;
+    return true;
   } else {
-    this->Year = 0;
+    return false;
   }
 }
 int Transaction::getYear() const { return Year; }
 
-void Transaction::setDay(int day) {
+bool Transaction::setDay(int day) {
   MonthInfo monthDetails = mapMonthInfo(this->Month, this->Year);
   bool checkedDay = checkDayInput(day, monthDetails);
   if (checkedDay) {
     this->Day = day;
+    return true;
   } else {
-    this->Day = 0;
+    return false;
   }
 }
 int Transaction::getDay() const { return Day; }
 
-void Transaction::setCategory(std::string category) {
+bool Transaction::setCategory(const std::string& category) {
   bool validCategory = checkNameInput(category);
   if (validCategory == true) {
     std::string capitalizedCategory = capitalizeFirstLetter(category);
     this->Category = capitalizedCategory;
+    return true;
   } else {
-    this->Category = "";
+    return false;
   }
 }
 std::string Transaction::getCategory() const { return Category; }
 
-void Transaction::setDescription(std::string description) {
+bool Transaction::setDescription(const std::string& description) {
   std::string capitalizedDescription = capitalizeFirstLetter(description);
   this->Description = capitalizedDescription;
+  return true;
 }
 std::string Transaction::getDescription() const { return Description; }
 
-void Transaction::setAmount(double amount) {
+bool Transaction::setAmount(double amount) {
   double roundedAmount = roundTo2Digits(amount);
   this->Amount = roundedAmount;
+  return true;
 }
 double Transaction::getAmount() const { return Amount; }
 
@@ -92,10 +96,10 @@ Transaction::Transaction() {
 }
 
 // Stored Transaction Info Constructor
-Transaction::Transaction(const std::string cName, const int cDay,
+Transaction::Transaction(const std::string& cName, const int cDay,
                          const int cMonth, const int cYear,
-                         const std::string cCategory,
-                         const std::string cDescription, const double cAmount) {
+                         const std::string& cCategory,
+                         const std::string& cDescription, const double cAmount) {
   setName(cName);
   setMonth(cMonth);
   setYear(cYear);
@@ -118,53 +122,67 @@ Expense::Expense() {
 }
 
 // Stored Expense Info Constructor
-Expense::Expense(const std::string cName, const int cDay, const int cMonth,
-                 const int cYear, const std::string cCategory,
-                 const std::string cDescription, const double cAmount)
+Expense::Expense(const std::string& cName, int cDay, int cMonth,
+                 int cYear, const std::string& cCategory,
+                 const std::string& cDescription, double cAmount)
     : Transaction(cName, cDay, cMonth, cYear, cCategory, cDescription,
                   cAmount) {};
 
 // --- Income Class ---
 // Setters & Getters
-void Income::setSource(const std::string source) {
+bool Income::setSource(const std::string& source) {
   bool validSource = checkSourceInput(source);
   if (validSource) {
     std::string capitalizedSource = capitalizeFirstLetter(source);
     this->Source = capitalizedSource;
+    return true;
   } else {
-    this->Source = "";
+    return false;
   }
 }
 std::string Income::getSource() const { return Source; }
 
-void Income::setGrossAmount(const double grossAmount) {
+bool Income::setGrossAmount(double grossAmount) {
   this->GrossAmount = grossAmount;
+  return true;
 }
 double Income::getGrossAmount() const { return GrossAmount; }
 
-void Income::setFrequency(const int frequency) { this->Frequency = frequency; }
+bool Income::setFrequency(int frequency) { 
+  this->Frequency = frequency; 
+  return true;
+}
 int Income::getFrequency() const { return Frequency; }
 
-void Income::setMode(const std::string mode) {
+bool Income::setMode(const std::string& mode) {
   std::string capitalizedMode = capitalizeFirstLetter(mode);
   this->Mode = capitalizedMode;
+  return true;
 }
 std::string Income::getMode() const { return Mode; }
 
-void Income::setTaxRate(const double taxRate) { this->TaxRate = taxRate; }
+bool Income::setTaxRate(double taxRate) { 
+  this->TaxRate = taxRate; 
+  return true;
+}
 double Income::getTaxRate() const { return TaxRate; }
 
-void Income::setTaxCategory(const std::string taxCategory) {
+bool Income::setTaxCategory(const std::string& taxCategory) {
   std::string capitalizedTaxCategory = capitalizeFirstLetter(taxCategory);
   this->TaxCategory = capitalizedTaxCategory;
+  return true;
 }
 std::string Income::getTaxCategory() const { return TaxCategory; }
 
-void Income::setStatus(const std::string status) { this->Status = status; }
+bool Income::setStatus(const std::string& status) { 
+  this->Status = status; 
+  return true;
+}
 std::string Income::getStatus() const { return Status; }
 
-void Income::setBudgetAllocation(const std::string budgetAllocation) {
+bool Income::setBudgetAllocation(const std::string& budgetAllocation) {
   this->BudgetAllocation = budgetAllocation;
+  return true;
 }
 std::string Income::getBudgetAllocation() const { return BudgetAllocation; }
 
@@ -187,13 +205,13 @@ Income::Income() {
 }
 
 // Stored Income Info Constructor
-Income::Income(const std::string cName, const int cDay, const int cMonth,
-               const int cYear, const std::string cSource,
-               const double cGrossAmount, const std::string cCategory,
-               const std::string cDescription, const double cAmount,
-               const int cFrequency, const std::string cMode,
-               const double cTaxRate, const std::string cTaxCategory,
-               const std::string cStatus, const std::string cBudgetAllocation)
+Income::Income(const std::string& cName, int cDay, int cMonth,
+               int cYear, const std::string& cSource,
+               double cGrossAmount, const std::string& cCategory,
+               const std::string& cDescription, double cAmount,
+               int cFrequency, const std::string& cMode,
+               double cTaxRate, const std::string& cTaxCategory,
+               const std::string& cStatus, const std::string& cBudgetAllocation)
     : Transaction(cName, cDay, cMonth, cYear, cCategory, cDescription,
                   cAmount) {
   setSource(cSource);
@@ -205,37 +223,3 @@ Income::Income(const std::string cName, const int cDay, const int cMonth,
   setStatus(cStatus);
   setBudgetAllocation(cBudgetAllocation);
 };
-
-// --- Budget Class ---
-// Setters & Getters
-void Budget::setBudgetedAmount(const double budgetedAmount) {
-  BudgetedAmount = budgetedAmount;
-}
-double Budget::getBudgetedAmount() const { return BudgetedAmount; }
-void Budget::setActualAmount(const double actualAmount) {
-  ActualAmount = actualAmount;
-}
-double Budget::getActualAmount() const { return ActualAmount; }
-
-// Default Constructor
-Budget::Budget() {
-  BudgetedAmount = 0;
-  ActualAmount = 0;
-}
-
-// Stored Budget Info Constructor
-Budget::Budget(const double cBudgetedAmount, const double cActualAmount) {
-  BudgetedAmount = cBudgetedAmount;
-  ActualAmount = cActualAmount;
-}
-
-// Methods
-std::string Budget::calcDifference() {
-  double difference;
-  difference = BudgetedAmount - ActualAmount;
-  if (difference < 0) {
-    return "-ve cash flow";
-  } else {
-    return "+ve cash flow";
-  }
-}
