@@ -109,7 +109,4 @@ Flux follows a modular design to separate concerns:
 ---
 
 ## 💡 Pro-Tips
-
-**Optimizing the Build**
-
-- When modifying the core engine or the UI logic, simply run `make` to recompile. The build system is configured to only recompile the changed modules, keeping your development cycle fast.
+When modifying the core engine or the UI logic, simply run `make` to recompile. The build system is configured to only recompile the changed modules, keeping your development cycle fast.
