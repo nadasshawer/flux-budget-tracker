@@ -1,22 +1,29 @@
-#include "../header_files/classes.h"
-#include "../header_files/data_display.h"
-#include "../header_files/functions.h"
-#include "../header_files/registration.h"
+/**
+ - @file main.cpp
+ - @brief entry point for the flux systems engine.
+ */
+
+#include "../../include/core/registration.h"
+#include "../../include/core/login.h"
+#include "../../include/auth/menu_handler.h"
 #include <iostream>
-using namespace std;
 
 int main() {
-  // PROGRAM WELCOME MSG
-  cout << "WELCOME TO PERSONAL FINANCE MANAGER" << endl
-       << endl
-       << "Please enter your information to register." << endl
-       << endl;
+    // welcome message for the flux systems engine
+    std::cout << "WELCOME TO FLUX SYSTEMS ENGINE\n\n";
 
-  // REGISTER USER
-  registerUser();
+    // handles user registration logic
+    std::cout << "Please register your account.\n";
+    registerUser();
 
-  // TRACKER CHOICE
-  chooseTracker();
+    // loops login until authentication is successful
+    bool authenticated = false;
+    while (!authenticated) {
+        authenticated = loginUser();
+    }
 
-  return 0;
+    // launches the main menu for tracker selection
+    chooseTracker();
+
+    return 0;
 }
