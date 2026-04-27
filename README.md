@@ -142,11 +142,14 @@ make
 
 ---
 
-## 📈 Roadmap
+## 📈 Project Roadmap
 
-- [x] **Milestone 1:** Core Inheritance & Memory Management
-- [x] **Milestone 2:** Refactoring for "Headless" Logic
-- [x] **Milestone 3:** Unified Frame FTXUI Implementation
+- [x] Milestone 1: Build the core C++ classes (Transaction, User, etc.) to hold all the data
+- [x] Milestone 2: Create the "Helper" functions and validation logic to make sure the inputs are correct
+- [x] Milestone 3: Write all the Setters and Getters to move data safely between the classes
+- [x] Milestone 4: Install the FTXUI library and get the CMake build system to actually recognize it
+- [x] Milestone 5: Build the actual TUI screens and connect the buttons to the  C++ logic
+- [x] Milestone 6: Fix the focus bugs and navigation so the Mouse and Escape keys work perfectly
 
 ---
 
