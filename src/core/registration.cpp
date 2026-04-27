@@ -28,19 +28,23 @@ void registerUser() {
     InputOption pass_opt; pass_opt.password = true;
     Component input_p = Input(&p_word, "••••••••", pass_opt);
 
-    // MOUSE SUPPORT: ScreenInteractive::TerminalOutput() usually handles it,
-    // but we ensure the Loop is clean.
     auto screen = ScreenInteractive::TerminalOutput();
 
-    auto btn = Button(" REGISTER ACCOUNT ", [&] {
+    auto btn = Button(" GENERATE SYSTEM IDENTITY ", [&] {
         std::string feedback = getPasswordFeedback(p_word);
-        if (f_name.empty() || l_name.empty() || day_str.empty() || year_str.empty()) {
-            error_msg = "Error: All fields are required!";
+        int year_val = 0;
+        try { year_val = std::stoi(year_str); } catch (...) { year_val = 0; }
+
+        if (f_name.empty() || l_name.empty()) {
+            error_msg = "Error: Names cannot be empty!";
+        } else if (year_val < 1900 || year_val > 2026) {
+            error_msg = "Error: Invalid Birth Year (1900-2026)!";
         } else if (feedback != "VALID") {
             error_msg = feedback; 
         } else {
             final_username = (char)tolower(f_name[0]) + l_name + year_str;
             newUser.setUsername(final_username);
+            newUser.setPassword(p_word); // save the password
             show_success = true; 
         }
     });

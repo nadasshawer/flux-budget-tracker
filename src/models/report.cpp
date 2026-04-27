@@ -1,8 +1,20 @@
-// File Imports
-#include "../../include/models/report.h"
-
-// Library Imports
+#include <vector>
 #include <string>
 
-// --- Report Class ---
-// Setters & Getters
+struct Transaction {
+    std::string type; // "INCOME" or "EXPENSE"
+    std::string source;
+    double amount;
+};
+
+class Report {
+public:
+    static std::vector<Transaction> history;
+    
+    static void addTransaction(std::string t, std::string s, double a) {
+        history.push_back({t, s, a});
+    }
+};
+
+// Initialize the static member
+std::vector<Transaction> Report::history = {};
