@@ -16,31 +16,31 @@
   <tr style="border: none;">
     <td align="center" style="border-bottom: 1px solid #333; border-right: 1px solid #333; padding: 20px; width: 50%;">
       <b>User Registration Dashboard</b><br><br>
-      <img src="images/image.png" width="340"><br><br>
+      <img src="images/image.png" width="400"><br><br>
     </td>
     <td align="center" style="border-bottom: 1px solid #333; padding: 20px; width: 50%;">
       <b>Login Page</b><br><br>
-      <img src="images/image-1.png" width="340"><br><br>
+      <img src="images/image-1.png" width="400"><br><br>
     </td>
   </tr>
   <tr style="border: none;">
     <td align="center" style="border-bottom: 1px solid #333; border-right: 1px solid #333; padding: 20px;">
       <b>Main Menu Navigator</b><br><br>
-      <img src="images/image-6.png" width="340"><br><br>
+      <img src="images/image-6.png" width="400"><br><br>
     </td>
     <td align="center" style="border-bottom: 1px solid #333; padding: 20px;">
       <b>Revenue/Income Tracker</b><br><br>
-      <img src="images/image-7.png" width="340"><br><br>
+      <img src="images/image-7.png" width="400"><br><br>
     </td>
   </tr>
   <tr style="border: none;">
     <td align="center" style="border-right: 1px solid #333; padding: 20px;">
       <b>Expense Tracker</b><br><br>
-      <img src="images/image-8.png" width="340"><br><br>
+      <img src="images/image-8.png" width="400"><br><br>
     </td>
     <td align="center" style="padding: 20px;">
       <b>Financial Report</b><br><br>
-      <img src="images/image-9.png" width="340"><br><br>
+      <img src="images/image-9.png" width="400"><br><br>
     </td>
   </tr>
 </table>
