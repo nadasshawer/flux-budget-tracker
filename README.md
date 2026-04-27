@@ -87,7 +87,8 @@ make
 │   ├── models/              # Accounting logic & data structures
 │   └── validation/          # Strict year & password checks
 │
-├── CMakeLists.txt           # Modern build configuration
+├── images/                  # Storyboard screenshots
+├── CMakeLists.txt           # Build configuration
 └── README.md                # You're here!
 ```
 
