@@ -47,6 +47,54 @@
 
 ---
 
+## 🛠️ Tech Stack & Core Libraries
+
+**Core Logic & Language**
+<p align="left">
+  <img src="https://img.shields.io/badge/C%2B%2B20-Standard-4facfe?style=flat-square" />
+  <img src="https://img.shields.io/badge/STL-Containers-4facfe?style=flat-square" />
+  <img src="https://img.shields.io/badge/CMake-3.10+-4facfe?style=flat-square" />
+</p>
+
+**Interface & UX (TUI)**
+<p align="left">
+  <img src="https://img.shields.io/badge/FTXUI-Library-52b788?style=flat-square" />
+  <img src="https://img.shields.io/badge/UI-Component--Based-52b788?style=flat-square" />
+  <img src="https://img.shields.io/badge/UX-Event--Driven-52b788?style=flat-square" />
+</p>
+
+**System Architecture**
+<p align="left">
+  <img src="https://img.shields.io/badge/OOP-Modular-ce9ffc?style=flat-square" />
+  <img src="https://img.shields.io/badge/Logic-Functional-ce9ffc?style=flat-square" />
+  <img src="https://img.shields.io/badge/State-Management-ce9ffc?style=flat-square" />
+</p>
+
+---
+
+## ✨ Key Features
+
+### 1. Unified Frame Interface
+
+Unlike standard terminal apps, Flux uses a **Single-Page Application (SPA)** approach. The main system border stays static while the internal content (Income, Expense, Ledger) swaps out dynamically, creating a true GUI feel.
+
+### 2. Precise Financial Ledger
+
+- **Real-Time Auditing:** Automatically calculates Net Position using high-precision doubles.
+- **Formatted Reporting:** Generates a structured accounting table with column alignment and 2-decimal point enforcement.
+
+### 3. Secure Gateway
+
+- **Strict Validation:** Validates birth years (1900-2026) and enforces password complexity.
+- **Identity Matching:** Cross-references session credentials to prevent unauthorized access.
+
+### 4. Interactive UX
+
+- **Mouse Support:** Full mouse integration for menu selection and button clicks.
+- **Global Hotkeys:** Quick emergency exit and navigation via keyboard interrupts (`Q` / `ESC`).
+
+---
+
 ## 🚀 Quick Start
 
 **Clone the repository:**
@@ -91,29 +139,6 @@ make
 ├── CMakeLists.txt           # Build configuration
 └── README.md                # You're here!
 ```
-
----
-
-## 🛠️ Key Features
-
-### 1. Unified Frame Interface
-
-Unlike standard terminal apps, Flux uses a **Single-Page Application (SPA)** approach. The main system border stays static while the internal content (Income, Expense, Ledger) swaps out dynamically, creating a true GUI feel.
-
-### 2. Precise Financial Ledger
-
-- **Real-Time Auditing:** Automatically calculates Net Position using high-precision doubles.
-- **Formatted Reporting:** Generates a structured accounting table with column alignment and 2-decimal point enforcement.
-
-### 3. Secure Gateway
-
-- **Strict Validation:** Validates birth years (1900-2026) and enforces password complexity.
-- **Identity Matching:** Cross-references session credentials to prevent unauthorized access.
-
-### 4. Interactive UX
-
-- **Mouse Support:** Full mouse integration for menu selection and button clicks.
-- **Global Hotkeys:** Quick emergency exit and navigation via keyboard interrupts (`Q` / `ESC`).
 
 ---
 
