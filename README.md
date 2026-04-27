@@ -126,13 +126,13 @@ make
 ├── include/                 # Blueprints: All Header Files (.h)
 │   ├── auth/                # registration.h, user_info.h
 │   ├── core/                # menu_handler.h, navigation logic
-│   ├── models/              # report.h (Transaction history)
+│   ├── models/              # classes.h, budget.h, report.h (classes)
 │   └── validation/          # input validation & regex
 │
 ├── src/                     # The Engine: Core C++ Logic (.cpp)
 │   ├── auth/                # Secure login & registration logic
 │   ├── core/                # Unified Frame TUI & State Management
-│   ├── models/              # Accounting logic & data structures
+│   ├── models/              # Accounting logic & class structures
 │   └── validation/          # Strict year & password checks
 │
 ├── images/                  # Storyboard screenshots
