@@ -9,7 +9,6 @@
 **Flux** is a budget tracker powered by **C++20**. Designed with a "Systems-First" philosophy, it treats personal finance with the precision of a low-level engine. By utilizing a **Unified Frame Architecture**, Flux provides a smooth, single-page GUI experience directly inside the terminal via the **FTXUI library**, delivering memory efficiency without the bloat of traditional frameworks.
 
 ---
----
 
 ## 🖼️ System Storyboard
 
